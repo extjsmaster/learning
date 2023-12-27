@@ -4,7 +4,15 @@ namespace App\classes\Department;
 
 class Department
 {
+    /**
+     * @var Task[]
+     */
     public $tasks = [];
+
+    /**
+     * @var Task[]
+     */
+    public $archive = [];
 
     public $developers = [];
 
@@ -18,6 +26,11 @@ class Department
         $this->tasks[] = $task;
     }
 
+    public function archiveTask(Task $task)
+    {
+        $this->archive[] = $task;
+
+    }
     public function findExpectDeveloper(string $skill): ?Developer
     {
         if (count($this->developers) == 0) {
@@ -34,8 +47,11 @@ class Department
 
     public function runNextTask()
     {
-        foreach ($this->tasks as $task) {
-            if ($task->isReady()) {
+        foreach ($this->tasks as $index => $task) {
+            if ($task->inWork() && $task->isReady()) {
+                $task->getDeveloper()->completeTask();
+                $this->archiveTask($task);
+                array_splice($this->tasks, $index, 1);
                 continue;
             }
             $developer = $this->findExpectDeveloper($task->skill);

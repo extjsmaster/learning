@@ -7,6 +7,8 @@ use App\classes\Department\Department;
 use App\classes\Department\Developer;
 use App\classes\Department\Task;
 
+use function PHPUnit\Framework\assertCount;
+
 class DepartmentTest extends TestCase
 {
     /**
@@ -79,5 +81,29 @@ class DepartmentTest extends TestCase
         $developerSecond->addSkill('React');
         $this->department->runNextTask();
         $this->assertTrue($taskSecond->inWork());
+    }
+
+    public function testUnsetArrayIyemIntoForeach()
+    {
+        $array = [1,3,5,7,8];
+        $newArray = [];
+        foreach($array as $index => &$item) {
+            if($item == 5) {
+                array_splice($array, $index, 1);
+            // unset($array[$index]);
+            } else {
+                $newArray[] = $item;
+            }
+        }
+        $this->assertSame($newArray, $array);
+        $this->assertCount(4, $newArray);
+    }
+
+    public function testArchiveTask()
+    {
+        $this->assertCount(0, $this->department->archive);
+        $task = new Task('php');
+        $this->department->archiveTask($task);
+        $this->assertCount(1, $this->department->archive);
     }
 }
