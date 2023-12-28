@@ -90,7 +90,7 @@ class DepartmentTest extends TestCase
         foreach($array as $index => &$item) {
             if($item == 5) {
                 array_splice($array, $index, 1);
-            // unset($array[$index]);
+                // unset($array[$index]);
             } else {
                 $newArray[] = $item;
             }

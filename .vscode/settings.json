@@ -1,3 +1,6 @@
 {
-    "phpunit.command": "php"
+    "phpunit.command": "php",
+    "php-cs-fixer.onsave": true,
+    "intelephense.environment.documentRoot": "public",
+    "php-cs-fixer.formatHtml": true
 }
