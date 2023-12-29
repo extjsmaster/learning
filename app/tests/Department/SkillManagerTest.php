@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\functional\classes\Learning\Department;
+namespace App\Tests\Department;
 
 use App\Tests\TestCase;
 use App\classes\Department\SkillManager;

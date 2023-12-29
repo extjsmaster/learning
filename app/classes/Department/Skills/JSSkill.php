@@ -2,9 +2,7 @@
 
 namespace App\classes\Department\Skills;
 
-use App\classes\Department\Skill;
-
-class JSSkill extends Skill
+class JSSkill extends ProgrammingSkill
 {
     public const KEY = 'js';
 }
