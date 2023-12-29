@@ -24,4 +24,11 @@ abstract class TaskTest extends TestCase
         $this->developer = new Developer();
         parent::setUp();
     }
+
+    protected function tearDown(): void
+    {
+        unset($this->task);
+        unset($this->developer);
+        // parent:tearDown();
+    }
 }

@@ -29,13 +29,13 @@ class Task
 
     public function __construct(string $skill, int $ttl = 1)
     {
-        $this->skill = $skill;
+        $this->skill = strtolower($skill);
         $this->ttl = $ttl;
     }
 
     public function setSkill(string $skill)
     {
-        $this->skill = $skill;
+        $this->skill = strtolower($skill);
     }
 
     protected function setStatus(string $status)
@@ -55,7 +55,6 @@ class Task
     public function complete()
     {
         if ($this->inWork()) {
-            $this->developer = null;
             $this->status = 'complete';
             $this->completed_at = new \DateTimeImmutable();
         }

@@ -5,7 +5,7 @@ namespace App\classes\Department;
 class Developer
 {
     /**
-     * @var string[]
+     * @var Skill[]
      */
     public $skills = [];
 
@@ -14,21 +14,38 @@ class Developer
      */
     protected $task = null;
 
+    /**
+     * @var SkillManager
+     */
+    protected $manager;
+
     public function __construct(array $skills = [])
     {
-        $this->skills = $skills;
+        $this->manager = new SkillManager();
+        foreach($skills as $skill) {
+            $this->addSkill($skill);
+        }
     }
 
     public function addSkill(string $skill)
     {
-        if (!in_array($skill, $this->skills)) {
-            $this->skills[] = $skill;
+        if (!array_key_exists($skill, $this->skills)) {
+            $this->skills[$skill] = $this->manager->createSkill($skill);
         }
     }
 
-    public function hasSkill(string $skill)
+    public function hasSkill(string $skillName)
     {
-        return in_array($skill, $this->skills);
+        if(array_key_exists($skillName, $this->skills)) {
+            return true;
+        }
+        foreach($this->skills as $key => $skill) {
+            $className = $this->manager->getSkillClass($skillName);
+            if($skill instanceof $className) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getTask(): ?Task

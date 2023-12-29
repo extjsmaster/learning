@@ -20,9 +20,9 @@ class CompleteTaskTest extends TaskTest
         $this->assertNotNull($this->task->completed_at);
     }
 
-    public function testNullDeveloper()
+    public function testNotNullDeveloper()
     {
-        $this->assertNull($this->task->getDeveloper());
+        $this->assertNotNull($this->task->getDeveloper());
     }
 
 }

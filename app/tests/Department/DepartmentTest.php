@@ -2,6 +2,7 @@
 
 namespace App\Tests\Department;
 
+use DateInterval;
 use App\Tests\TestCase;
 use App\classes\Department\Department;
 use App\classes\Department\Developer;
@@ -28,12 +29,18 @@ class DepartmentTest extends TestCase
         // parent:tearDown();
     }
 
-    public function testDepartment()
+    public function testEmptyTasks()
     {
         $this->assertCount(0, $this->department->tasks);
+    }
+    public function testEmptyDevelopers()
+    {
         $this->assertCount(0, $this->department->developers);
     }
-
+    public function testEmptyArchive()
+    {
+        $this->assertCount(0, $this->department->archive);
+    }
     public function testAddDeveloper()
     {
         $dev = new Developer();
@@ -48,10 +55,13 @@ class DepartmentTest extends TestCase
         $this->assertCount(1, $this->department->tasks);
     }
 
-    public function testFindDeveloperBySkill()
+    public function testNotFindDeveloperBySkill()
     {
         $need = $this->department->findExpectDeveloper('php');
         $this->assertNull($need);
+    }
+    public function testFindDeveloperBySkill()
+    {
         $developer = new Developer(['php']);
         $this->department->addDeveloper($developer);
         $need = $this->department->findExpectDeveloper('php');
@@ -61,7 +71,7 @@ class DepartmentTest extends TestCase
 
     public function testRunTask()
     {
-        $developer = new Developer(['php', 'React']);
+        $developer = new Developer(['php', 'react']);
         $this->department->addDeveloper($developer);
         $developerSecond = new Developer(['javascript']);
         $this->department->addDeveloper($developer);
@@ -70,7 +80,7 @@ class DepartmentTest extends TestCase
         $this->assertTrue($task->isNew());
 
         $this->department->addTask($task);
-        $taskSecond = new Task('React');
+        $taskSecond = new Task('react');
         $this->assertTrue($taskSecond->isNew());
 
         $this->department->addTask($taskSecond);
@@ -78,25 +88,9 @@ class DepartmentTest extends TestCase
         $this->assertTrue($task->inWork());
         $this->assertFalse($taskSecond->inWork());
 
-        $developerSecond->addSkill('React');
+        $developerSecond->addSkill('react');
         $this->department->runNextTask();
         $this->assertTrue($taskSecond->inWork());
-    }
-
-    public function testUnsetArrayIyemIntoForeach()
-    {
-        $array = [1,3,5,7,8];
-        $newArray = [];
-        foreach($array as $index => &$item) {
-            if($item == 5) {
-                array_splice($array, $index, 1);
-                // unset($array[$index]);
-            } else {
-                $newArray[] = $item;
-            }
-        }
-        $this->assertSame($newArray, $array);
-        $this->assertCount(4, $newArray);
     }
 
     public function testArchiveTask()
@@ -105,5 +99,42 @@ class DepartmentTest extends TestCase
         $task = new Task('php');
         $this->department->archiveTask($task);
         $this->assertCount(1, $this->department->archive);
+    }
+    public function testCompleteNewTask()
+    {
+        $task = new Task('php');
+        $this->department->addTask($task);
+        $this->assertFalse($this->department->completeTask($task));
+    }
+
+    protected function beginTask(): Task
+    {
+        $task = new Task('php');
+        $this->department->addTask($task);
+        $developer = new Developer(['php', 'react']);
+        $this->department->addDeveloper($developer);
+        $task->begin($developer);
+        return $task;
+    }
+    public function testCompleteWorkingTask()
+    {
+        $task = $this->beginTask();
+        $task->begined_at = $task->begined_at->sub(new DateInterval('P2D'));
+        $this->assertTrue($this->department->completeTask($task));
+        $this->assertCount(1, $this->department->archive);
+    }
+    public function testArchiveCountAfterCompleteTask()
+    {
+        $task = $this->beginTask();
+        $task->begined_at = $task->begined_at->sub(new DateInterval('P2D'));
+        $this->department->completeTask($task);
+        $this->assertCount(1, $this->department->archive);
+    }
+    public function testTaskStatusAfterCompleteTask()
+    {
+        $task = $this->beginTask();
+        $task->begined_at = $task->begined_at->sub(new DateInterval('P2D'));
+        $this->department->completeTask($task);
+        $this->assertTrue($task->isComplete());
     }
 }

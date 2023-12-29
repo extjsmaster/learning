@@ -25,6 +25,12 @@ class SkillTest extends TestCase
         $this->skill = new ProgrammingSkill();
         parent::setUp();
     }
+
+    protected function tearDown(): void
+    {
+        unset($this->skill);
+        // parent:tearDown();
+    }
     public function testCreate()
     {
         $this->assertEquals('skill', $this->skill->getKey());
