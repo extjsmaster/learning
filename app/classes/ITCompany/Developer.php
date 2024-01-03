@@ -1,6 +1,6 @@
 <?php
 
-namespace App\classes\Department;
+namespace App\classes\ITCompany;
 
 class Developer
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Department;
+namespace App\Tests\ITCompany\Task;
 
 use App\Tests\TestCase;
-use App\classes\Department\Developer;
-use App\classes\Department\Task;
+use App\classes\ITCompany\Developer;
+use App\classes\ITCompany\Task;
 
 abstract class TaskTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Department;
+namespace App\Tests\ITCompany\Task;
 
 use DateInterval;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\classes\Department\Skills;
+namespace App\classes\ITCompany\Skills;
 
 class PythonSkill extends ProgrammingSkill
 {

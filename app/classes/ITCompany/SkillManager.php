@@ -1,15 +1,15 @@
 <?php
 
-namespace App\classes\Department;
+namespace App\classes\ITCompany;
 
-use App\classes\Department\Skills\DjangoSkill;
-use App\classes\Department\Skills\JSSkill;
-use App\classes\Department\Skills\LaravelSkill;
-use App\classes\Department\Skills\PHPSkill;
-use App\classes\Department\Skills\ProgrammingSkill;
-use App\classes\Department\Skills\PythonSkill;
-use App\classes\Department\Skills\ReactSkill;
-use App\classes\Department\Skills\SymfonySkill;
+use App\classes\ITCompany\Skills\DjangoSkill;
+use App\classes\ITCompany\Skills\JSSkill;
+use App\classes\ITCompany\Skills\LaravelSkill;
+use App\classes\ITCompany\Skills\PHPSkill;
+use App\classes\ITCompany\Skills\ProgrammingSkill;
+use App\classes\ITCompany\Skills\PythonSkill;
+use App\classes\ITCompany\Skills\ReactSkill;
+use App\classes\ITCompany\Skills\SymfonySkill;
 
 class SkillManager
 {
@@ -34,7 +34,8 @@ class SkillManager
         return new $className();
     }
 
-    public function createSkills(array $skills): array {
-       return array_map(function($skill){return $this->createSkill($skill);}, $skills);    
+    public function createSkills(array $skills): array
+    {
+        return array_map(function ($skill) {return $this->createSkill($skill);}, $skills);
     }
 }

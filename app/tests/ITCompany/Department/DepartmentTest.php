@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Department;
+namespace App\Tests\ITCompany\Department;
 
 use DateInterval;
 use App\Tests\TestCase;
-use App\classes\Department\Department;
-use App\classes\Department\Developer;
-use App\classes\Department\Task;
+use App\classes\ITCompany\Department;
+use App\classes\ITCompany\Developer;
+use App\classes\ITCompany\Task;
 
 use function PHPUnit\Framework\assertCount;
 

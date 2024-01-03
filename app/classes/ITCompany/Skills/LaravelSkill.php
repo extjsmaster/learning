@@ -1,8 +1,6 @@
 <?php
 
-namespace App\classes\Department\Skills;
-
-use App\classes\Department\Skill;
+namespace App\classes\ITCompany\Skills;
 
 class LaravelSkill extends PHPSkill
 {

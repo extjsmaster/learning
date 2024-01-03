@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Tests\Department;
+namespace App\Tests\ITCompany\Skill;
 
 use App\Tests\TestCase;
-use App\classes\Department\Skill;
-use App\classes\Department\Skills\DjangoSkill;
-use App\classes\Department\Skills\JSSkill;
-use App\classes\Department\Skills\LaravelSkill;
-use App\classes\Department\Skills\PHPSkill;
-use App\classes\Department\Skills\ProgrammingSkill;
-use App\classes\Department\Skills\PythonSkill;
-use App\classes\Department\Skills\ReactSkill;
-use App\classes\Department\Skills\SymfonySkill;
+use App\classes\ITCompany\Skill;
+use App\classes\ITCompany\Skills\DjangoSkill;
+use App\classes\ITCompany\Skills\JSSkill;
+use App\classes\ITCompany\Skills\LaravelSkill;
+use App\classes\ITCompany\Skills\PHPSkill;
+use App\classes\ITCompany\Skills\ProgrammingSkill;
+use App\classes\ITCompany\Skills\PythonSkill;
+use App\classes\ITCompany\Skills\ReactSkill;
+use App\classes\ITCompany\Skills\SymfonySkill;
 
 class SkillTest extends TestCase
 {

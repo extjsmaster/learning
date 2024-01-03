@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Tests\Department;
+namespace App\Tests\ITCompany\Skill;
 
-use App\classes\Department\Skill;
+use App\classes\ITCompany\Skill;
 use App\Tests\TestCase;
-use App\classes\Department\SkillManager;
-use App\classes\Department\Skills\PHPSkill;
-use App\classes\Department\Skills\JSSkill;
-use App\classes\Department\Skills\PythonSkill;
+use App\classes\ITCompany\SkillManager;
+use App\classes\ITCompany\Skills\PHPSkill;
+use App\classes\ITCompany\Skills\JSSkill;
+use App\classes\ITCompany\Skills\PythonSkill;
+
 class SkillManagerTest extends TestCase
 {
     /**
@@ -16,7 +17,7 @@ class SkillManagerTest extends TestCase
     protected $manager;
     protected function setUp(): void
     {
-        $this->manager  = new SkillManager;
+        $this->manager  = new SkillManager();
     }
     public function testGetSkillClass()
     {
@@ -25,13 +26,15 @@ class SkillManagerTest extends TestCase
         $this->assertEquals(PythonSkill::class, $this->manager->getSkillClass('python'));
     }
 
-    public function testCreateSkill(){
+    public function testCreateSkill()
+    {
         $skill = $this->manager->createSkill('php');
         $this->assertEquals('php', $skill::KEY);
         $this->assertInstanceOf(PHPSkill::class, $skill);
     }
 
-    public function testCreateSkills(){
+    public function testCreateSkills()
+    {
         $this->assertContainsOnlyInstancesOf(Skill::class, $this->manager->createSkills(['php','js']));
     }
 }
